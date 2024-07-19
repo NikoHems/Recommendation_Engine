@@ -1,5 +1,3 @@
-### README for Recommendations with IBM Project
-
 ## Project Overview
 
 This project is part of the Udacity Data Scientist Nanodegree program, in collaboration with IBM. The goal of the project is to build a recommendation system for the IBM Watson Studio platform. We leverage various recommendation techniques, including collaborative filtering and matrix factorization, to suggest articles to users based on their interaction history.
