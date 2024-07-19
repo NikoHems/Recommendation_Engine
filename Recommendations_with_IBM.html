@@ -7516,16 +7516,12 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Recommendations-with-IBM">Recommendations with IBM<a class="anchor-link" href="#Recommendations-with-IBM">¶</a></h1><p>In this notebook, you will be putting your recommendation skills to use on real data from the IBM Watson Studio platform.</p>
-<p>You may either submit your notebook through the workspace here, or you may work from your local machine and submit through the next page.  Either way assure that your code passes the project <a href="https://review.udacity.com/#!/rubrics/3325/view">RUBRIC</a>.  <strong>Please save regularly.</strong></p>
-<p>By following the table of contents, you will build out a number of different methods for making recommendations that can be used for different situations.</p>
-<h2 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">¶</a></h2><p>I. <a href="#Exploratory-Data-Analysis">Exploratory Data Analysis</a><br/>
+<h1 id="Recommendations-with-IBM">Recommendations with IBM<a class="anchor-link" href="#Recommendations-with-IBM">¶</a></h1><h2 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">¶</a></h2><p>I. <a href="#Exploratory-Data-Analysis">Exploratory Data Analysis</a><br/>
 II. <a href="#Rank">Rank Based Recommendations</a><br/>
 III. <a href="#User-User">User-User Based Collaborative Filtering</a><br/>
 IV. <a href="#Content-Recs">Content Based Recommendations (EXTRA - NOT REQUIRED)</a><br/>
 V. <a href="#Matrix-Fact">Matrix Factorization</a><br/>
 VI. <a href="#conclusions">Extras &amp; Concluding</a></p>
-<p>At the end of the notebook, you will find directions for how to submit your work.  Let's get started by importing the necessary libraries and reading in the data.</p>
 </div>
 </div>
 </div>
@@ -7633,8 +7629,7 @@ VI. <a href="#conclusions">Extras &amp; Concluding</a></p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [77]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Show df_content to get an idea of the data</span>
-<span class="n">df_content</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">df_content</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -9698,7 +9693,7 @@ The top 10 recommendations for user 20 are the following article names:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [136]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [137]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">call</span>
@@ -9716,12 +9711,13 @@ The top 10 recommendations for user 20 are the following article names:
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>[NbConvertApp] Converting notebook Recommendations_with_IBM.ipynb to html
-[NbConvertApp] Writing 359332 bytes to Recommendations_with_IBM.html
+[NbConvertApp] WARNING | Alternative text is missing on 3 image(s).
+[NbConvertApp] Writing 506846 bytes to Recommendations_with_IBM.html
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[136]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[137]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>0</pre>
 </div>
