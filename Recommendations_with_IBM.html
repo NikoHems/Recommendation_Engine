@@ -9335,13 +9335,28 @@ The top 10 recommendations for user 20 are the following article names:
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>Provide your response here.</strong></p>
-<h3 id="Explanation-of-SVD-Results">Explanation of SVD Results<a class="anchor-link" href="#Explanation-of-SVD-Results">¶</a></h3><ol>
-<li><strong><code>u</code> matrix</strong>: Shape (5149, 714) - Represents users in the latent space.</li>
-<li><strong><code>s</code> matrix</strong>: Shape (714,) - Diagonal matrix with singular values.</li>
-<li><strong><code>vt</code> matrix</strong>: Shape (714, 714) - Represents items (articles) in the latent space.</li>
+<p>To handle the problem of missing values in the user-item matrix, we perform Singular Value Decomposition (SVD). In the lessons, we couldn't use standard SVD directly because it requires a complete matrix without any missing values. Instead, we used FunkSVD, which is specifically designed to work with sparse matrices by iteratively approximating the missing values.</p>
+<p>Here's how we approached this problem:</p>
+<ol>
+<li><p><strong>Matrix Preparation</strong>: We first created the user-item matrix, ensuring all missing values were filled. This was achieved by using techniques like zero-filling, mean imputation, or other heuristics suitable for the dataset.</p>
+</li>
+<li><p><strong>Applying SVD</strong>: Once we had a fully populated matrix, we applied SVD. This decomposed the matrix into three components: (U), (S), and (V^T).</p>
+<ul>
+<li><strong>U matrix</strong>: Represents the users in the latent space.</li>
+<li><strong>S matrix</strong>: A diagonal matrix containing the singular values.</li>
+<li><strong>V^T matrix</strong>: Represents the items (articles) in the latent space.</li>
+</ul>
+</li>
+<li><p><strong>Latent Factors</strong>: By capturing the latent factors, we can understand the underlying patterns in user preferences and item characteristics. These factors help in reconstructing the original matrix with approximations for the missing values.</p>
+</li>
 </ol>
-<h3 id="Difference-from-Lesson">Difference from Lesson<a class="anchor-link" href="#Difference-from-Lesson">¶</a></h3><p>In the lesson, collaborative filtering was used to predict ratings based on user interactions. Here, we use SVD to decompose the user-item matrix, capturing latent factors that represent underlying patterns in user preferences and item characteristics. This method uncovers hidden relationships, making it effective for sparse matrices.</p>
+<h3 id="Why-This-Approach-Is-Appropriate">Why This Approach Is Appropriate<a class="anchor-link" href="#Why-This-Approach-Is-Appropriate">¶</a></h3><p>Incorporating SVD to handle missing values involves creating a complete matrix as a prerequisite. This is different from the lesson, where FunkSVD was directly used on sparse data. Our approach of preprocessing the matrix to fill in the gaps ensures that SVD can be applied effectively, leveraging its ability to uncover hidden relationships within the data. By transforming the incomplete matrix into a form suitable for SVD, we can then utilize the latent factors to make more accurate predictions and recommendations.</p>
+<h3 id="Explanation-of-Results">Explanation of Results<a class="anchor-link" href="#Explanation-of-Results">¶</a></h3><ol>
+<li><strong><code>U</code> matrix</strong>: Shape (5149, 714) - Represents users in the latent space.</li>
+<li><strong><code>S</code> matrix</strong>: Shape (714,) - Diagonal matrix with singular values.</li>
+<li><strong><code>V^T</code> matrix</strong>: Shape (714, 714) - Represents items (articles) in the latent space.</li>
+</ol>
+<p>By using this method, we ensure that the missing values do not hinder the SVD process, allowing us to accurately capture the latent features and improve the recommendation system's effectiveness.</p>
 </div>
 </div>
 </div>
@@ -9661,7 +9676,17 @@ The top 10 recommendations for user 20 are the following article names:
 <li>Increased latent features improved accuracy initially.</li>
 <li>Beyond a point, additional features provided minimal gains.</li>
 </ul>
-<h3 id="Steps-to-Validate-Improvement">Steps to Validate Improvement<a class="anchor-link" href="#Steps-to-Validate-Improvement">¶</a></h3><ol>
+<p><strong>Detailed Explanation of Results</strong>
+As we increased the number of latent features, the accuracy of our SVD model initially improved. This indicates that the model was effectively capturing more complex patterns and relationships in the data. However, after reaching an optimal number of latent features, we observed that adding more features started to decrease the test accuracy.</p>
+<p>This downward curve can be attributed to several factors:</p>
+<p><strong>Overfitting:</strong></p>
+<p>When too many latent features are used, the model becomes overly complex and starts to fit the noise in the training data rather than the underlying patterns. This results in high accuracy on the training set but poor generalization to the test set.</p>
+<p><strong>Model Complexity:</strong></p>
+<p>Increasing the number of latent features adds complexity to the model. While a complex model can capture intricate patterns, it also risks capturing spurious correlations that do not generalize well.</p>
+<p><strong>Bias-Variance Trade-off:</strong></p>
+<p>Initially, increasing latent features reduces bias and improves accuracy. However, beyond a certain point, the variance increases significantly, leading to overfitting. The trade-off between bias and variance is crucial: too few features lead to high bias (underfitting), while too many lead to high variance (overfitting).</p>
+<p><strong>Steps to Validate Improvement</strong></p>
+<ol>
 <li><p><strong>A/B Testing</strong>:</p>
 <ul>
 <li>Compare new and current systems.</li>
@@ -9692,7 +9717,7 @@ The top 10 recommendations for user 20 are the following article names:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [138]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">call</span>
@@ -9711,12 +9736,12 @@ The top 10 recommendations for user 20 are the following article names:
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
 <pre>[NbConvertApp] Converting notebook Recommendations_with_IBM.ipynb to html
 [NbConvertApp] WARNING | Alternative text is missing on 3 image(s).
-[NbConvertApp] Writing 506075 bytes to Recommendations_with_IBM.html
+[NbConvertApp] Writing 505985 bytes to Recommendations_with_IBM.html
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[138]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>0</pre>
 </div>
